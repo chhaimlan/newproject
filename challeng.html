@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript on Steriods</title>
+    <link rel="stylesheet" href="./newproject/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+<div id='game-board' class='game-board'></div>
+</head>
+<body>
+    <div class="container-1">
+      <h2>Challenge 1: Your age in Days</h2>
+      <div class="flex-box-container-1">
+         <div>
+           <button class="btn btn-primary" onclick="ageInDays()">Click me</button>
+         </div>
+         <div>
+            <button class="btn btn-danger" onclick="Reset()">Reset</button>
+         </div>
+      </div>
+      <div class="flex-box-container-1">
+          <div id="flex-box-result">
+
+          </div>
+      </div>
+
+    </div>
+    <div class="container-2">
+         <h2>Challeng 2: Cat Generate</h2>
+         <button class="btn btn-success" id="cat-generator" onclick="generatecate()">Generate Cat</button>
+         <div class="flex-box-container-2" id="flex-cat-gen">
+              <!-- <img src="http://thecatapi.com/api/images/get?format=src&type=gif&size=small" alt=""> -->
+         </div>
+    </div>
+    <div class="container-3">
+           <h2>Challeng 3: Rock, Paper, Scissors</h2>
+           <div class="flex-box-rps" id="flex-box-rps-div">
+                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1jmykZYurKgGFUP4d4NzVqHlaBjUfdwtx2Q&usqp=CAU"                 
+                 id="rock" height="150" width="150" alt="" onclick="rpsGame(this)">
+                 <img src="data:image/jpeg;base64,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"                 
+                 id="paper" height="150" width="150" alt="" onclick="rpsGame(this)">
+                 <img src="https://img.lovepik.com/original_origin_pic/19/01/10/314af86be9183821e97af780acee8c02.png_wh860.png"                 
+                 id="scissors" height="150" width="150" alt="" onclick="rpsGame(this)">
+
+           </div>
+    </div>
+    <div class="container-4">
+        <h2 id="change-my-color">Challeng 4: Change the color of all Button</h2>
+           <div class="flex-box-pick-color">
+                 <form action="">
+                     <select name="backdrop" id="background" onchange="btnchangecolor(this)">
+                           <option value="random">Random</option>
+                           <option value="red">Red</option>
+                           <option value="green">Green</option>
+                           <option value="reset">Reset</option>
+                    </select>
+                 </form>
+                 <button class="btn btn-primary">Wee!</button>
+                 <button class="btn btn-danger">Yahoo!</button>
+                 <button class="btn btn-warning">Google!</button>
+                 <button class="btn btn-success">Facebook!</button>
+           </div>
+    </div>
+    <div class="container-5">
+           <h2>Challeng 5:Blackjack</h2>
+           <h3> <span id="blackjack-result">Let's play</span></h3>
+           <div class="flex-blackjack-row-1">
+             <div id="your-box">
+                <h2>You: <span id="your-blackjack-result">0</span></h2>
+             </div>
+             <div id="dealer-box">
+               <h2>Dealer: <span id="dealer-blackjack-result">0</span></h2>
+             </div>
+          </div>
+          <div class="flex-blackjack-row-2">
+            <div>
+              <button class="btn-lg btn-primary mr-2" id="blackjack-hit-button">Hit</button>
+              <button class="btn-lg btn-warning mr-2" id="blackjack-stand-button">Stand</button>
+              <button class="btn-lg btn-danger mr-2" id="blackjack-deal-button">Deal</button>
+            </div>
+          </div>
+          <div class="flex-blackjack-row-3">
+              <table style="border: 1px solid black;">
+                  <tr>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>Draws</th>
+                  </tr>
+                  <tr>
+                     <td> <span id="wins">0</span></td>
+                     <td><span id="losses">0</span></td>
+                     <td><span id="draws">0</span></td>
+                  </tr>
+              </table>
+          </div>
+    </div>
+    <script src="./js/index.js"></script>
+</body>
+
+
+</html>
